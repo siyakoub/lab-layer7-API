@@ -1,0 +1,46 @@
+@startuml
+!theme plain
+
+entity Utilisateur {
+    id: int
+    name: varchar
+    firstName: varchar[254]
+    email: varchar[254]
+    password: varchar[254]
+    dateInscription: datetime
+    statut: ENUM
+}
+
+entity Administrateur {
+    id: int
+    niveau: ENUM
+}
+
+entity Client {
+    id: int
+    customerNumber: int
+}
+
+entity HistoRequest {
+    id: int
+    nameRequest: varchar[254]
+    request: text
+    path: varchar[254]
+    statut: ENUM
+}
+
+entity Session {
+    id: int
+    user_email: varchar[254]
+    token: varchar[254]
+    dateDebutSession: datetime
+    dateFinSession: datetime
+    actif: int
+}
+
+Administrateur ||--o{ Utilisateur: "Compte Admin"
+Client ||--o{ Utilisateur: "Compte Client"
+HistoRequest ||--o{ Client: "Historisation des requêtes Ansible"
+Utilisateur ||--o{ Session: "Session User"
+
+@enduml
